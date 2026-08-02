@@ -114,7 +114,7 @@ function kitCard(k){
     </div>
     <div class="cardBody">
       <h3 class="cardName">${esc(k.name)}</h3>
-      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14.5px;color:#8A8A92">${esc(k.desc)}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14.5px;color:var(--grey)">${esc(k.desc)}</div>
       <div class="kitList">${comps}</div>
       <div class="priceRow">
         <div class="priceLbl">Precio del kit</div>
@@ -336,7 +336,7 @@ function renderDrawer(){
         <label class="fLbl" for="fInstr">Instrucciones de entrega <span class="opt">· opcional</span></label>
         <textarea id="fInstr" rows="2" placeholder="Ej: dejar en portería, llamar al llegar…">${esc(state.addr.instr)}</textarea>
       </div>
-      <div id="fErr" style="display:none;color:#C8636F;font-size:12px;margin-top:4px;letter-spacing:.03em"></div>`;
+      <div id="fErr" style="display:none;color:var(--bad);font-size:12px;margin-top:4px;letter-spacing:.03em"></div>`;
     foot.innerHTML=`
       <button class="primaryBtn" onclick="UI.saveAddr()">Ver resumen del pedido</button>
       <button class="ghostBtn" onclick="UI.backToCart()">← Volver al pedido</button>`;
@@ -370,10 +370,10 @@ function renderDrawer(){
       <input id="discInput" type="text" placeholder="Código de descuento" value="${esc(state.disc.code||'')}">
       <button onclick="UI.applyDisc()">Aplicar</button>
     </div>
-    <div class="discMsg ${state.disc.ok?'ok':(state.disc.msg?'bad':'')}">${esc(state.disc.msg)}${state.disc.ok?` <a href="#" onclick="UI.clearDisc();return false" style="color:#4A4A50">(quitar)</a>`:''}</div>
+    <div class="discMsg ${state.disc.ok?'ok':(state.disc.msg?'bad':'')}">${esc(state.disc.msg)}${state.disc.ok?` <a href="#" onclick="UI.clearDisc();return false" style="color:var(--dim)">(quitar)</a>`:''}</div>
     <div class="tRow"><span>Subtotal</span><span>${fmt(sub)}</span></div>
     ${state.disc.ok?`<div class="tRow"><span>Descuento (${esc(state.disc.code)})</span><span class="neg">−${fmt(disc)}</span></div>`:''}
-    <div class="tRow"><span>Envío</span><span style="color:#4A4A50">se calcula con la dirección</span></div>
+    <div class="tRow"><span>Envío</span><span style="color:var(--dim)">se calcula con la dirección</span></div>
     <div class="tRow total"><span class="l">Total parcial</span><span class="v">${fmt(sub-disc)}</span></div>
     <button class="primaryBtn" ${entries.length?'':'disabled'} onclick="UI.goAddress()">Continuar · datos de entrega</button>
     <div class="dNote">Precios COP</div>`;
@@ -401,11 +401,11 @@ function showSummary(){
     </div>
     <div class="sBlock">
       <div class="sLine"><span>Subtotal</span><span>${fmt(sub)}</span></div>
-      ${state.disc.ok?`<div class="sLine"><span>Descuento (${esc(state.disc.code)})</span><span style="color:#7FBF8E">−${fmt(disc)}</span></div>`:''}
+      ${state.disc.ok?`<div class="sLine"><span>Descuento (${esc(state.disc.code)})</span><span style="color:var(--ok)">−${fmt(disc)}</span></div>`:''}
       <div class="sLine"><span>Envío${ship!=null?' (Bogotá)':''}</span><span>${ship!=null?fmt(ship):'se confirma vía WhatsApp'}</span></div>
-      <div class="sLine" style="border-top:1px solid rgba(255,255,255,.1);margin-top:8px;padding-top:12px">
-        <span style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8A8A92">Total${ship==null?' (sin envío)':''}</span>
-        <span style="font-size:20px;color:#fff;font-weight:600">${fmt(total)}</span>
+      <div class="sLine" style="border-top:1px solid var(--line);margin-top:8px;padding-top:12px">
+        <span style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--grey)">Total${ship==null?' (sin envío)':''}</span>
+        <span style="font-size:20px;color:var(--ink);font-weight:600">${fmt(total)}</span>
       </div>
     </div>
     <div class="sBlock">
